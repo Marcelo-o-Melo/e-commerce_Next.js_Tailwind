@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import MenuQuantidade from '../components/MenuQuantidade';
+import valorFormatado from '../utils/Currency.js'
 
 export default function PageCarrinho() {
   const [carrinho, setCarrinho] = useState<any[]>([]);
@@ -80,7 +81,7 @@ export default function PageCarrinho() {
                 </div>
               </div>
               <div className="flex items-center ml-auto">
-                <h2 className='mr-6 text-black text-xl'>R$ {produto.preco}</h2>
+                <h2 className='mr-6 text-black text-xl'>{valorFormatado(produto.preco * produto.quantidade)}</h2>
               </div>
             </div>
           ))}
@@ -88,10 +89,10 @@ export default function PageCarrinho() {
 
         {/* Área direita */}
         <div className="border border-gray-300 flex flex-col items-center  ml-4 mr-2 px-2 w-[30%] max-h-[150px] bg-white">
-          <h2 className="text-black mt-3">subtotal ({totalQuantidade} {totalQuantidade === 1 ? "item" : "itens"}): R$ {subtotal.toFixed(2)}</h2>
+          <h2 className="text-black mt-3">subtotal ({totalQuantidade} {totalQuantidade === 1 ? "item" : "itens"}): R$ {valorFormatado(subtotal)}</h2>
           <button
             onClick={finalizarPedido}
-            className="border rounded-lg px-2 mt-auto mb-3 text-black hover:bg-green-400"
+            className="border rounded-md px-2 mt-auto mb-3 text-black hover:bg-green-400"
           >
             Finalizar pedido
           </button>

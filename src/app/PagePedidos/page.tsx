@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from 'react';
+import valorFormatado from '../utils/Currency.js'
 
 export default function PagePedidos() {
   const [pedidos, setPedido] = useState<any[]>([]);
@@ -25,12 +26,12 @@ export default function PagePedidos() {
                 {pedido.produtos.map((produto: any, idx: number) => (
                   <div key={idx} className="flex justify-between ">
                     <span>{produto.nome} (x{produto.quantidade})</span>
-                    <span>R$ {(produto.preco * produto.quantidade).toFixed(2)}</span>
+                    <span>{valorFormatado(produto.preco * produto.quantidade)}</span>
                   </div>
                 ))}
               </div>
               <div className="mt-2 flex justify-end">
-                <h3 className="text-lg font-semibold text-black">Total: R$ {pedido.total.toFixed(2)}</h3>
+                <h3 className="text-lg font-semibold text-black">Total: {valorFormatado(pedido.total)}</h3>
               </div>
             </div>
           ))
